@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Рабочее место оператора — 0.23</title>
+<style>
+:root{--bg:#101722;--panel:#182333;--panel2:#202e40;--line:#34465c;--text:#edf3fa;--muted:#a9b8ca;--blue:#62b6ff;--green:#68d6a0;--red:#ff6e78;--amber:#ffc76a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#1c2b3e 0%,var(--bg) 65%);color:var(--text);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid white;outline-offset:3px}.app{max-width:1200px;margin:auto;padding:18px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px}.brand{display:flex;align-items:center;gap:11px}.logo{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#24496b;font-size:24px}h1{font-size:clamp(19px,3vw,26px);margin:0}.subtitle{color:var(--muted);font-size:12px}.topright{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.stats{display:flex;gap:7px;flex-wrap:wrap}.stat{border:1px solid var(--line);background:#152131;border-radius:10px;padding:8px 10px;color:var(--muted);font-size:12px}.stat strong{color:var(--text);font-size:14px;margin-left:4px}.btn{border:0;border-radius:9px;padding:10px 14px;font-weight:750}.primary{background:var(--blue);color:#102033}.secondary{background:#2a3a4e;color:var(--text);border:1px solid #42556d}.danger{background:var(--red);color:#2b1014}.layout{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:14px}.window{background:rgba(24,35,51,.97);border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:0 18px 50px #0003}.head{padding:11px 14px;border-bottom:1px solid var(--line);background:#1b293a;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;align-items:center}.body{min-height:475px;padding:clamp(16px,3vw,30px);display:flex;flex-direction:column;justify-content:center}.center{text-align:center;align-items:center}.statusicon{width:72px;height:72px;display:grid;place-items:center;border-radius:22px;background:#22374c;font-size:36px;margin:0 auto 16px}.pulse{animation:pulse 1s infinite}@keyframes pulse{50%{box-shadow:0 0 0 9px #62b6ff16}}h2{font-size:23px;margin:0 0 8px}p{color:var(--muted);margin:0 0 14px}.small{font-size:12px;color:var(--muted)}.callbanner{background:#392c1d;border:1px solid #805c2d;color:#ffe0a8;border-radius:10px;padding:10px;margin-bottom:15px;text-align:center}.clock{font-size:29px;color:var(--amber);font-weight:800;margin:6px 0 15px;font-variant-numeric:tabular-nums}.customer{display:flex;gap:14px;align-items:flex-start;margin-bottom:20px}.mood{font-size:39px;line-height:1;flex:0 0 52px;text-align:center;padding-top:3px}.mood.angry{filter:drop-shadow(0 0 5px #ff334d)}.answerMeta{display:block;color:var(--muted);font-size:11px;margin-top:4px;font-weight:500}.avatar{flex:0 0 60px;height:60px;border-radius:50%;display:grid;place-items:center;background:#dce9f6;color:#24374a;font-size:34px}.name{color:var(--blue);font-weight:750;font-size:12px;margin-bottom:5px}.question{font-size:20px;line-height:1.35}.answers{display:grid;gap:9px}.answer{width:100%;text-align:left;padding:12px;border-radius:10px;border:1px solid #40536a;background:#223146;color:var(--text)}.answer:hover{border-color:var(--blue);background:#293c53}.num{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:7px;background:#354b64;margin-right:8px;font-weight:800}.sidebody{padding:15px}.sideTitle{font-weight:800;margin-bottom:10px}.patience{height:330px;display:flex;align-items:stretch;gap:10px;justify-content:center;margin:10px 0 15px}.scale{width:34px;position:relative;border-radius:15px;background:linear-gradient(to top,#ff5964 0%,#f3a65d 38%,#657d93 50%,#68d6a0 68%,#68d6a0 100%);border:2px solid #3b4d62;overflow:hidden}.scale:before{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px dashed #fff9}.thumb{position:absolute;left:-7px;width:42px;height:14px;border:3px solid #fff;background:#263a50;border-radius:6px;transform:translateY(50%);box-shadow:0 2px 7px #0008;transition:bottom .2s}.scaleLabels{display:flex;flex-direction:column;justify-content:space-between;color:var(--muted);font-size:11px;padding:2px 0}.log{display:grid;gap:8px}.logitem{border-left:3px solid #40536a;padding-left:9px;color:var(--muted);font-size:12px}.logitem strong{display:block;color:var(--text)}.notice{margin-top:15px;padding:12px;background:#1d2c3e;border:1px solid #3a526a;border-radius:10px;color:var(--muted);font-size:12px}.notice strong{color:var(--text)}.grid{display:grid;grid-template-columns:repeat(4,minmax(46px,72px));gap:7px;justify-content:center;margin:18px auto}.tile{aspect-ratio:1;border:1px solid #53708b;border-radius:9px;background:#253c53;color:white;font-size:23px;font-weight:800;display:grid;place-items:center;user-select:none}.tile.pipe{font-size:30px;background:#1c3043}.tile.source{background:#235f4c}.tile.bulb{background:#725b24}.tile.empty{background:#111a25;border:1px dashed #34465c}.tile.sliding{background:#24496b}.wireTile{border:0;border-radius:0;padding:0;min-width:0;background:#142231;box-shadow:inset 0 0 0 1px #344b60;overflow:visible}.wireTile svg{display:block;width:100%;height:100%;overflow:visible}.wireTile.source{background:#174536}.wireTile.bulb{background:#4c4020}.wireTile.empty{background:#101a25;opacity:.75}.puzzlearea{text-align:center}.puzzlerow{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.timerline{height:7px;border-radius:10px;background:#33465a;overflow:hidden;margin:8px 0 15px}.timerfill{height:100%;width:100%;background:var(--green);transition:width .2s linear}.overlay{position:fixed;inset:0;background:#060b12c9;z-index:20;display:grid;place-items:center;padding:18px}.modal{width:min(480px,100%);background:#1a2738;border:1px solid #50647b;border-radius:17px;padding:26px;text-align:center;box-shadow:0 25px 90px #0008}.modalIcon{font-size:42px;margin-bottom:8px}.modal p{line-height:1.6}.hidden{display:none!important}.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:#8092a7;font-size:11px;margin-top:12px}.paused{filter:saturate(.65)}.helpContent{width:min(780px,100%);max-height:min(70vh,780px);overflow:auto;text-align:left;align-self:flex-start;margin:0 auto;padding:0 8px 8px}.helpContent .statusicon{margin-left:auto;margin-right:auto}.helpLead{font-size:16px;color:#e5edf7;text-align:center}.helpSection{padding:12px 0;border-top:1px solid #34465c}.helpSection h3{font-size:16px;color:#62b6ff;margin:0 0 7px}.helpSection p{margin:0 0 8px;line-height:1.6}.helpSection p:last-child{margin-bottom:0}@media(max-width:760px){.app{padding:10px}.layout{grid-template-columns:1fr}.body{min-height:390px}.patience{height:220px}.question{font-size:18px}}
+</style></head><body>
+<div class="app" id="app">
+<header class="topbar"><div class="brand"><div class="logo">☎</div><div><h1>Рабочее место оператора</h1><div class="subtitle">CRM поддержки клиентов · прототип 0.22</div></div></div>
+<div class="topright"><div class="stats"><div class="stat">Жизни <strong id="lives">♥ ♥ ♥</strong></div><div class="stat">Смена <strong id="shift">1</strong></div><div class="stat">Звонки <strong id="calls">0 / 10</strong></div><div class="stat">Квалификация <strong id="rank">Стажёр</strong></div></div><button class="btn secondary" id="pauseBtn">Ⅱ Пауза</button><button class="btn secondary" id="menuBtn">⌂ Главное меню</button><button class="btn primary hidden" id="playBtn">▶ Продолжить</button></div></header>
+<main class="layout"><section class="window"><div class="head"><span>● ● ● &nbsp; CRM / Входящая линия</span><span id="phaseLabel">Ожидание звонка</span></div><div class="body center" id="mainScreen"><div class="statusicon pulse">☎</div><h2>Линия свободна</h2><p>Ожидание входящего звонка…</p><div class="small">Звонок поступит в случайный момент в течение 15 секунд.</div></div></section>
+<aside class="window"><div class="head">Терпение клиента</div><div class="sidebody"><div class="sideTitle">Уровень терпения</div><div class="patience"><div class="scale"><div class="thumb" id="thumb" style="bottom:50%"></div></div><div class="scaleLabels"><span>+3 Спокоен</span><span>0 Нейтрально</span><span>−3 Уходит</span></div></div><div class="small" id="patienceText">Клиент ещё не на линии</div>
+<div class="notice" style="margin-top:14px"><strong>Шкала оплаты</strong>
+<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin:7px 0 4px"><span>0</span><span id="payValue">0 / 10</span><span>10</span></div>
+<div style="height:12px;background:#0f1925;border:1px solid #40536a;border-radius:8px;overflow:hidden"><div id="payFill" style="height:100%;width:0%;background:linear-gradient(90deg,#62b6ff,#68d6a0);transition:width .2s"></div></div>
+<div class="small" style="margin-top:5px">Верный ответ: +1 · Ошибка: −1</div>
+</div><div class="notice"><strong>Квалификация</strong><div id="rankInfo">Стажёр · повышение после 15 смен</div></div><div style="height:14px"></div><div class="sideTitle">Журнал</div><div class="log" id="log"><div class="logitem"><strong>Система запущена</strong>Готовность к смене.</div></div></div></aside></main>
+<div class="foot"><span>Локальный прототип · прогресс не сохраняется после закрытия страницы</span><span>Финансы: примеры на сложение и умножение · Esc — пауза</span></div></div>
+<div class="overlay hidden" id="modal"><div class="modal"><div class="modalIcon" id="modalIcon">⏸</div><h2 id="modalTitle">Пауза</h2><p id="modalText">Игра остановлена.</p><button class="btn primary" id="modalBtn">Продолжить</button></div></div>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const S={lives:3,shift:1,calls:0,accepted:0,missed:0,phase:'waiting',paused:false,gameOver:false,timeout:null,interval:null,gameDeadline:0,gameLeft:60,patience:0,pay:0,current:null,answered:false,interruptTimer:null,interruptOpen:false,interrupts:0,puzzleSolved:false,responseTimer:null,gameDuration:60,mathQuestion:null,mathAnswered:0,mathTarget:5,mood:'neutral'};
+let campaignStarted=false, testMode=false, testSnapshot=null, menuWasPaused=false, promotionComplete=false;
+const scenarios=[
+{type:'tech',name:'Алексей Морозов',q:'Интернет пропал, хотя роутер включён. Что делать?',answers:['Давайте проверим подключение и индикаторы роутера.','Помогу найти способ оплатить счёт.','Ничем не могу помочь, звоните позже.'],correct:0},
+{type:'finance',name:'Марина Соколова',q:'Подскажите, как оплатить счёт за интернет?',answers:['Перезагрузите роутер.','Сейчас помогу разобраться с оплатой счёта.','Это не ко мне, посмотрите на сайте.'],correct:1},
+{type:'tech',name:'Дмитрий Орлов',q:'На телевизоре чёрный экран, но звук иногда есть.',answers:['Давайте проверим кабель и источник сигнала.','Объясню, как оплатить задолженность.','Попробуйте позвонить в другой день.'],correct:0},
+{type:'finance',name:'Ирина Павлова',q:'Не получается оплатить счёт банковской картой. Поможете?',answers:['Давайте проверим доступные способы оплаты.','Перезагрузите телевизор.','Это ваша проблема, обратитесь куда-нибудь ещё.'],correct:0},
+{type:'tech',name:'Сергей Волков',q:'Wi-Fi подключён, но сайты не открываются. Что проверить?',answers:['Помогу найти удобный способ оплаты.','Проверим соединение и перезапустим роутер.','Не знаю, разбирайтесь сами.'],correct:1},
+{type:'finance',name:'Ольга Никитина',q:'Где посмотреть задолженность по лицевому счёту?',answers:['Проверьте индикатор Wi-Fi.','Подскажу, где посмотреть баланс и долг.','Читайте договор, там всё написано.'],correct:1},
+{type:'tech',name:'Павел Егоров',q:'На телевизоре нет звука. Как это исправить?',answers:['Проверим громкость, режим без звука и подключение.','Помогу разобраться с оплатой услуг.','Ищите инструкцию сами.'],correct:0},
+{type:'finance',name:'Виктория Белова',q:'Оплатила счёт, но в кабинете всё ещё отображается долг.',answers:['Проверим статус платежа и срок зачисления.','Проверьте HDMI-кабель.','Надо было внимательнее платить.'],correct:0},
+{type:'tech',name:'Елена Крылова',q:'Роутер мигает красным, соединения нет.',answers:['Сейчас объясню способы оплаты.','Давайте проверим индикацию и подключение линии.','Ничем не помогу.'],correct:1},
+{type:'finance',name:'Андрей Фомин',q:'Как оплатить услуги, если у меня нет банковского приложения?',answers:['Давайте подберём доступный способ оплаты.','Перезапустите роутер.','Это ваши трудности.'],correct:0}
+];
+const interruptions=[
+{moods:['neutral','negative'],q:'«Моё время не резиновое так-то?»',opts:[['Понимаю, что вы торопитесь. Я постараюсь решить вопрос как можно быстрее.',1],['Я продолжаю проверку вашего обращения.',0],['Не торопите меня.',-1]]},
+{moods:['neutral','negative'],q:'«Если вы будете столько возиться, я могу и в другую компанию уйти?»',opts:[['Понимаю ваши сомнения. Давайте я объясню, что сейчас проверяю.',1],['Ваш вопрос ещё в работе.',0],['Это ваше решение, мне всё равно.',-1]]},
+{moods:['neutral','negative'],q:'«Сколько можно ждать? Продиктуйте ваш табельный номер — наверное, буду писать жалобу!»',opts:[['Понимаю ваше недовольство. Могу объяснить статус обращения и порядок подачи жалобы.',1],['Я занимаюсь вашим вопросом.',0],['Пишите куда хотите.',-1]]},
+{moods:['neutral','negative'],q:'«Вы мне из своего кармана платить за время на линии собираетесь?»',opts:[['Понимаю, что ожидание неприятно. Постараюсь не затягивать.',1],['Проверка продолжается, пожалуйста, оставайтесь на линии.',0],['Тогда просто положите трубку.',-1]]},
+{moods:['positive'],q:'«Извините, а ещё долго? А то я тороплюсь.»',opts:[['Конечно, понимаю. Коротко расскажу, сколько ещё займёт проверка.',1],['Я ещё проверяю информацию.',0],['Подождёте — ничего страшного.',-1]]},
+{moods:['positive'],q:'«Как продвигается решение вопроса?»',opts:[['Спасибо, что уточнили. Уже проверил часть данных, сейчас завершаю следующий шаг.',1],['Работаю над вашим вопросом.',0],['Не отвлекайте, я занят.',-1]]},
+{moods:['positive'],q:'«Алло, вы тут ещё?»',opts:[['Да, я на линии! Извините за паузу, продолжаю проверку.',1],['Да, я здесь.',0],['А куда я денусь?',-1]]},
+{moods:['positive'],q:'«Ото тишина в трубке, я боялся, что звонок сорвался. Спасибо за помощь! А сколько это займёт времени?»',opts:[['Я здесь, не волнуйтесь! Спасибо за терпение. Думаю, понадобится ещё немного времени.',1],['Звонок не сорвался, я проверяю данные.',0],['Не переживайте так сильно.',-1]]}
+];
+let queue=[],audioCtx=null,ringLoop=null;
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function log(t,d){let n=document.createElement('div');n.className='logitem';let b=document.createElement('strong');b.textContent=t;let s=document.createElement('span');s.textContent=d;n.append(b,s);$('log').prepend(n);while($('log').children.length>5)$('log').lastElementChild.remove()}
+function stats(){$('lives').textContent='♥ '.repeat(S.lives).trim()+' ♡ '.repeat(3-S.lives);$('shift').textContent=S.shift;$('calls').textContent=`${S.calls} / 10`;$('rank').textContent=rank();$('rankInfo').textContent=promotionComplete?'Специалист · следующий уровень в разработке':rank()+' · повышение после 15 смен';$('thumb').style.bottom=(((S.patience+3)/6)*100)+'%';$('patienceText').textContent=S.current?`Уровень ${S.patience>0?'+':''}${S.patience} из 3`:'Клиент ещё не на линии';const maxPay=S.current&&S.current.type==='finance'?5:10;S.pay=Math.max(0,Math.min(maxPay,S.pay));$('payValue').textContent=`${S.pay} / ${maxPay}`; $('payFill').style.width=(S.pay/maxPay*100)+'%'}
+function rank(){if(promotionComplete)return 'Специалист';let r=Math.floor((S.shift-1)/15);return ['Стажёр','Специалист','Старший специалист','Эксперт','Ведущий эксперт'][Math.min(r,4)]}
+function stopAll(){clearTimeout(S.timeout);clearInterval(S.interval);clearTimeout(S.interruptTimer);clearTimeout(S.responseTimer);S.timeout=S.interval=S.interruptTimer=S.responseTimer=null;stopRing()}
+function beep(){try{audioCtx ||=new(window.AudioContext||window.webkitAudioContext)();let o=audioCtx.createOscillator(),g=audioCtx.createGain();o.frequency.value=740;g.gain.setValueAtTime(.08,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.22);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+.23)}catch(e){}}
+function startRing(){stopRing();beep();ringLoop=setInterval(beep,850)}function stopRing(){if(ringLoop)clearInterval(ringLoop);ringLoop=null}
+function render(html,center=false){$('mainScreen').className='body'+(center?' center':'');$('mainScreen').innerHTML=html}
+function scheduleCall(){if(S.paused||S.gameOver)return;if(S.calls>=10)return shiftEnd();S.phase='waiting';$('phaseLabel').textContent='Ожидание звонка';render('<div class="statusicon pulse">☎</div><h2>Линия свободна</h2><p>Ожидание входящего звонка…</p><div class="small">Следующий звонок поступит случайно в течение 15 секунд.</div>',true);S.timeout=setTimeout(incoming,1000+Math.random()*14000)}
+function incoming(){if(S.paused||S.gameOver)return;S.phase='ringing';S.calls++;S.current=queue.shift()||scenarios[Math.floor(Math.random()*scenarios.length)];S.mood=pickMood(S.current.type);stats();$('phaseLabel').textContent='Входящий звонок';startRing();let start=Date.now();render('<div class="callbanner">● ВХОДЯЩИЙ ЗВОНОК</div><div class="statusicon pulse">☎</div><h2>Звонит клиент</h2><p>Ответьте, пока клиент не отключился.</p><div class="clock" id="ringClock">3.0 сек.</div><button class="btn primary" id="answer">☎ Ответить</button>',true);$('answer').onclick=answer;S.interval=setInterval(()=>{let e=$('ringClock');if(e)e.textContent=Math.max(0,3-(Date.now()-start)/1000).toFixed(1)+' сек.'},50);S.timeout=setTimeout(()=>{if(S.phase==='ringing')miss()},3000)}
+function pickMood(type){const r=Math.random();if(type==='finance')return r<.45?'positive':r<.85?'neutral':'negative';return r<.45?'negative':r<.85?'neutral':'positive'}
+function moodFace(){return S.mood==='positive'?'😊':S.mood==='negative'?'😡':'😐'}
+function answer(){if(S.phase!=='ringing'||S.paused)return;clearTimeout(S.timeout);clearInterval(S.interval);S.timeout=S.interval=null;stopRing();S.accepted++;S.phase='question';S.patience=0;S.gameDuration=S.current.type==='finance'?90:60;S.gameLeft=S.gameDuration;S.pay=0;S.mathQuestion=null;S.mathAnswered=0;S.mathTarget=5;wireTiles=[];S.interrupts=0;S.puzzleSolved=false;S.answered=false;stats();log('Звонок принят',S.current.name+' · '+(S.mood==='positive'?'позитивный клиент':S.mood==='negative'?'негативный клиент':'нейтральный клиент'));showCustomerQuestion()}
+function showCustomerQuestion(){
+ const isTech=S.current.type==='tech';
+ const right=S.current.answers[S.current.correct];
+ const rude='Это не мои проблемы. Разбирайтесь сами!';
+ const wrong=isTech?'Давайте я помогу разобраться с оплатой услуг.':'Давайте проверим подключение роутера и кабели.';
+ const options=[
+  {kind:'tech',label:'Технический ответ',text:isTech?right:wrong,correct:isTech},
+  {kind:'finance',label:'Ответ по оплате',text:isTech?wrong:right,correct:!isTech},
+  {kind:'rude',label:'Грубый ответ',text:rude,correct:false}
+ ];
+ const face=moodFace(),moodLabel=S.mood==='positive'?'Позитивный клиент':S.mood==='negative'?'Недовольный клиент':'Нейтральный клиент';
+ $('phaseLabel').textContent='Вопрос клиента';
+ render(`<div class="customer"><div class="mood ${S.mood==='negative'?'angry':''}">${face}</div><div><div class="name">${S.current.name} · ${moodLabel}</div><div class="question">${S.current.q}</div></div></div><p>Выберите ответ операторa. Не по теме — клиенту не поможет, грубость приведёт к потере клиента.</p><div class="answers">${options.map((o,i)=>`<button class="answer" data-choice="${i}"><span class="num">${i+1}</span><b>${o.label}</b><span class="answerMeta">${o.text}</span></button>`).join('')}</div>`);
+ document.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>chooseCustomerAnswer(options[Number(b.dataset.choice)])));
+}
+function chooseCustomerAnswer(choice){if(S.phase!=='question'||S.paused)return;
+ // Выбор тематики звонка не меняет терпение: шкала меняется только на закрытых репликах в мини-игре.
+ if(choice.kind==='rude'){
+  log('Грубый ответ','Клиент отказался от услуг компании.');
+  failClient('Клиент ушёл из компании','Вы ответили грубо. Клиент отказался от услуг компании.');return;
+ }
+ if(!choice.correct){log('Ответ не по теме','Клиенту предложили решение не по его вопросу.');}
+ else log('Ответ принят','Тематика выбрана верно. Терпение изменится только при ответах на закрытые вопросы во время мини-игры.');
+ stats();startPuzzle();
+}
+function startPuzzle(){if(S.paused)return;S.phase='puzzle';$('phaseLabel').textContent=S.current.type==='tech'?'Техническая задача':'Финансовая задача';S.gameDeadline=Date.now()+S.gameLeft*1000;drawPuzzle();S.interval=setInterval(tickPuzzle,200);planInterrupt()}
+function tickPuzzle(){if(S.paused||S.phase!=='puzzle')return;S.gameLeft=Math.max(0,(S.gameDeadline-Date.now())/1000);let t=$('gameClock');if(t)t.textContent=Math.ceil(S.gameLeft)+' сек.';let f=$('timerfill');if(f){f.style.width=(S.gameLeft/S.gameDuration*100)+'%';f.style.background=S.gameLeft<15?'var(--red)':'var(--green)'}if(S.gameLeft<=0){clearInterval(S.interval);failClient('Время вышло','Не успели решить задачу за минуту. Клиент ушёл.')} }
+function headerPuzzle(){return `<div class="customer"><div class="mood ${S.mood==='negative'?'angry':''}">${moodFace()}</div><div><div class="name">${S.current.name}</div><div class="question">${S.current.q}</div></div></div><div class="small">Решите задачу за <b id="gameClock">${S.gameDuration} сек.</b></div><div class="timerline"><div class="timerfill" id="timerfill"></div></div>`}
+let wireTiles=[],wireGoal=[],slideTiles=[];
+function drawPuzzle(){if(S.current.type==='tech'&&wireTiles.length!==49)initWires();render(`<div>${headerPuzzle()}<div class="puzzlearea" id="puzzleArea"></div></div>`);if(S.current.type==='tech')drawWires();else drawMath();tickPuzzle()}
+function initWires(){
+ // Сложный уровень 7x7 без пустых клеток: длинный маршрут и отвлекающие трубы.
+ const N=7,LAST=48,BEFORE_LAST=47;
+ wireTiles=Array.from({length:N*N},()=>({kind:'straight',rot:0}));
+ wireGoal=Array.from({length:N*N},()=>({kind:'straight',rot:0}));
+ const neighbors=i=>{
+  const r=Math.floor(i/N),c=i%N,out=[];
+  if(r>0)out.push(i-N);if(c<N-1)out.push(i+1);if(r<N-1)out.push(i+N);if(c>0)out.push(i-1);
+  return out.sort(()=>Math.random()-.5);
+ };
+ let route=null;
+ for(let attempt=0;attempt<700&&!route;attempt++){
+  const path=[0,1],seen=new Set(path);
+  function dfs(at){
+   if(at===BEFORE_LAST&&path.length>=12&&path.length<=20){path.push(LAST);return true;}
+   if(path.length>=20)return false;
+   for(const n of neighbors(at)){
+    if(seen.has(n)||n===0||n===LAST)continue;
+    if(n===BEFORE_LAST&&(path.length<12||path.length>20))continue;
+    seen.add(n);path.push(n);
+    if(dfs(n))return true;
+    path.pop();seen.delete(n);
+   }
+   return false;
+  }
+  if(dfs(1))route=path.slice();
+ }
+ if(!route)route=[0,1,2,9,16,15,22,29,30,31,32,39,46,47,48];
+ wireTiles[0]={kind:'source',rot:0,flowOut:1};wireTiles[LAST]={kind:'bulb',rot:0,flowIn:3};
+ wireGoal[0]={kind:'source',rot:0,flowOut:1};wireGoal[LAST]={kind:'bulb',rot:0,flowIn:3};
+ const direction=(a,b)=>{const ar=Math.floor(a/N),ac=a%N,br=Math.floor(b/N),bc=b%N;if(br<ar)return 0;if(bc>ac)return 1;if(br>ar)return 2;return 3;};
+ const portsFor=(kind,rot)=>kind==='straight'?(rot%2===0?[0,2]:[1,3]):kind==='corner'?[[0,1],[1,2],[2,3],[3,0]][rot]:kind==='tee'?[[0,1,3],[0,1,2],[1,2,3],[0,2,3]][rot]:kind==='cross'?[0,1,2,3]:[];
+ const samePorts=(a,b)=>a.length===b.length&&a.every(x=>b.includes(x));
+ route.forEach((idx,pos)=>{
+  if(idx===0||idx===LAST)return;
+  const need=[direction(idx,route[pos-1]),direction(idx,route[pos+1])];
+  const kind=need[0]%2===need[1]%2?'straight':'corner';
+  const candidates=[];
+  for(let rot=0;rot<4;rot++)if(need.every(d=>portsFor(kind,rot).includes(d)))candidates.push(rot);
+  const goalRot=candidates[Math.floor(Math.random()*candidates.length)];
+  wireGoal[idx]={kind,rot:goalRot,flowIn:need[0],flowOut:need[1]};
+  const wrong=[];
+  for(let rot=0;rot<4;rot++)if(!samePorts(portsFor(kind,rot),portsFor(kind,goalRot)))wrong.push(rot);
+  wireTiles[idx]={kind,rot:wrong[Math.floor(Math.random()*wrong.length)],flowIn:need[0],flowOut:need[1]};
+ });
+ // Ни одной пустой клетки: все свободные позиции заняты трубами, тройниками и крестовинами.
+ for(let i=0;i<N*N;i++){
+  if(route.includes(i))continue;
+  const roll=Math.random();
+  const kind=roll<.22?'straight':roll<.48?'corner':roll<.76?'tee':'cross';
+  wireTiles[i]={kind,rot:Math.floor(Math.random()*4)};
+  const distractorPorts=portsFor(kind,wireTiles[i].rot);
+  const flowIn=distractorPorts[0]??0,flowOut=distractorPorts.find(d=>d!==flowIn)??flowIn;
+  wireGoal[i]={kind,rot:wireTiles[i].rot,flowIn,flowOut};wireTiles[i]={...wireTiles[i],flowIn,flowOut};
+ }
+ // Убедимся, что маршрут не подключён заранее.
+ for(let attempt=0;attempt<80&&wireDistances()[LAST]>=0;attempt++){
+  route.slice(1,-1).forEach(idx=>{
+   const goal=wireGoal[idx],wrong=[];
+   for(let rot=0;rot<4;rot++)if(!samePorts(portsFor(goal.kind,rot),portsFor(goal.kind,goal.rot)))wrong.push(rot);
+   if(wrong.length)wireTiles[idx]={...goal,rot:wrong[Math.floor(Math.random()*wrong.length)]};
+  });
+ }
+ // Проверяем гарантированное решение: временно ставим все детали маршрута
+ // в правильные положения и убеждаемся, что источник соединяется с лампочкой.
+ const scrambled=route.map(idx=>({idx,tile:{...wireTiles[idx]}}));
+ route.slice(1,-1).forEach(idx=>{wireTiles[idx]={...wireGoal[idx]};});
+ const hasSolution=wireDistances()[LAST]>=0;
+ scrambled.forEach(x=>{wireTiles[x.idx]=x.tile;});
+ // Защитный запасной вариант: если проверка не прошла, оставляем гарантированный
+ // маршрут в правильных положениях, чтобы задача никогда не была нерешаемой.
+ if(!hasSolution)route.slice(1,-1).forEach(idx=>{wireTiles[idx]={...wireGoal[idx]};});
+}
+function wirePorts(t){
+ if(t.kind==='source')return [1];
+ if(t.kind==='bulb')return [3];
+ if(t.kind==='straight')return t.rot%2===0?[0,2]:[1,3];
+ if(t.kind==='corner')return [[0,1],[1,2],[2,3],[3,0]][t.rot];
+ if(t.kind==='tee')return [[0,1,3],[0,1,2],[1,2,3],[0,2,3]][t.rot];
+ if(t.kind==='cross')return [0,1,2,3];
+ return [];
+}
+function wireFlow(t,i){
+ if(t.kind==='source')return {inPort:null,outPort:1};
+ if(t.kind==='bulb')return {inPort:3,outPort:null};
+ const goal=wireGoal[i]||t,delta=((t.rot-(goal.rot||0))%4+4)%4;
+ const turn=d=>(d+delta)%4;
+ return {inPort:goal.flowIn==null?null:turn(goal.flowIn),outPort:goal.flowOut==null?null:turn(goal.flowOut)};
+}
+function wireDistances(){
+ const N=7,dist=Array(N*N).fill(-1),q=[0];dist[0]=0;
+ for(let n=0;n<q.length;n++){
+  const i=q[n],r=Math.floor(i/N),c=i%N,flow=wireFlow(wireTiles[i],i);
+  if(flow.outPort==null)continue;
+  const d=flow.outPort,nr=r+[-1,0,1,0][d],nc=c+[0,1,0,-1][d];
+  if(nr<0||nr>=N||nc<0||nc>=N)continue;
+  const j=nr*N+nc,opp=(d+2)%4,neighbor=wireFlow(wireTiles[j],j);
+  if(!wirePorts(wireTiles[j]).includes(opp)||neighbor.inPort!==opp||dist[j]!==-1)continue;
+  dist[j]=dist[i]+1;q.push(j);
+ }
+ return dist;
+}
+function wireSvg(t,i,dist){
+ if(t.kind==='empty')return '<svg viewBox="0 0 60 60" aria-hidden="true"></svg>';
+ const edges={0:[30,0],1:[60,30],2:[30,60],3:[0,30]};
+ const N=7,r=Math.floor(i/N),c=i%N,ports=wirePorts(t);
+ const flow=wireFlow(t,i);
+ const paths=ports.map(d=>{
+  const nr=r+[-1,0,1,0][d],nc=c+[0,1,0,-1][d],j=nr*N+nc,opp=(d+2)%4,neighbor=nr>=0&&nr<N&&nc>=0&&nc<N?wireFlow(wireTiles[j],j):null;
+  const matched=nr>=0&&nr<N&&nc>=0&&nc<N&&wirePorts(wireTiles[j]).includes(opp)&&flow.outPort===d&&neighbor.inPort===opp&&dist[i]>=0&&dist[j]>=0;
+  const color=matched?'#68d6a0':'#8ba3b8';
+  const [x,y]=edges[d];
+  return `<path d="M30 30 L${x} ${y}" stroke="${color}" stroke-width="9" stroke-linecap="round" fill="none"/>`;
+ }).join('');
+ let arrow='';
+ if(flow.outPort!=null&&ports.includes(flow.outPort)){
+  const vectors=[{x:0,y:-1},{x:1,y:0},{x:0,y:1},{x:-1,y:0}],v=vectors[flow.outPort],px=30+v.x*20,py=30+v.y*20,baseX=px-v.x*7,baseY=py-v.y*7,perpX=-v.y*3.8,perpY=v.x*3.8;
+  arrow=`<polygon points="${px},${py} ${baseX+perpX},${baseY+perpY} ${baseX-perpX},${baseY-perpY}" fill="#f8d477" stroke="#5a4716" stroke-width="0.8"/>`;
+ }
+ let icon='';
+ if(t.kind==='source')icon='<text x="30" y="38" text-anchor="middle" font-size="27" font-family="system-ui,sans-serif">⚡</text>';
+ else if(t.kind==='bulb')icon='<text x="30" y="38" text-anchor="middle" font-size="27" font-family="system-ui,sans-serif">💡</text>';
+ return `<svg viewBox="0 0 60 60" aria-hidden="true">${paths}${arrow}<circle cx="30" cy="30" r="4.5" fill="#d7e5ef"/>${icon}</svg>`;
+}
+function drawWires(){
+ const a=$('puzzleArea');
+ a.innerHTML='<p><b>Соедините ⚡ с 💡 и соблюдайте направление тока. Поворачивайте трубки на 90°. Стрелки показывают направление: ток должен идти от источника к лампочке. Поле 7×7 заполнено трубами, тройниками и четырёхсторонними разветвителями.</p><div class="grid" id="wireGrid" style="grid-template-columns:repeat(7,minmax(32px,52px));gap:0;max-width:364px;width:100%"></div><div class="small">Сложный уровень: поле 7×7, все 49 клеток заняты, длинный маршрут и много развилок.</div><div id="wireStatus" class="small" style="margin-top:10px">Пока цепь разорвана. Поворачивайте трубки.</div>';
+ const g=$('wireGrid');
+ const dist=wireDistances();
+ wireTiles.forEach((t,i)=>{
+  const b=document.createElement('button');
+  b.className='tile wireTile '+(t.kind==='source'?'source':t.kind==='bulb'?'bulb':t.kind==='empty'?'empty':'pipe');
+  b.setAttribute('aria-label',t.kind==='source'?'Источник электричества':t.kind==='bulb'?'Лампочка':t.kind==='empty'?'Пустая клетка':'Повернуть трубку '+(i+1));
+  b.innerHTML=wireSvg(t,i,dist);
+  b.title=t.kind==='source'?'Источник':t.kind==='bulb'?'Лампочка':t.kind==='empty'?'Пустая клетка':'Нажмите, чтобы повернуть трубку';
+  if(t.kind==='empty')b.disabled=true;
+  if(t.kind==='straight'||t.kind==='corner'||t.kind==='tee'||t.kind==='cross')b.onclick=()=>{
+   if(S.phase!=='puzzle'||S.paused)return;
+   t.rot=(t.rot+1)%4;
+   updateWires();
+   if(checkWires())winClient();
+  };
+  g.append(b);
+ });
+ checkWires();
+}
+function updateWires(){
+ const g=$('wireGrid');if(!g)return;
+ const dist=wireDistances();
+ wireTiles.forEach((t,i)=>{const b=g.children[i];if(b)b.innerHTML=wireSvg(t,i,dist)});
+ const connected=dist[48]>=0,status=$('wireStatus');
+ if(status)status.textContent=connected?'✅ Провод непрерывно соединяет источник с лампочкой!':'Цепь пока не собрана по направлению тока. Стрелки должны вести от ⚡ к 💡.';
+}
+function checkWires(){
+ const dist=wireDistances(),connected=dist[48]>=0,status=$('wireStatus');
+ if(status)status.textContent=connected?'✅ Провод непрерывно соединяет источник с лампочкой!':'Цепь пока не собрана по направлению тока. Совмещайте контакты и стрелки от ⚡ к 💡.';
+ // Перерисовываем контакты, сохраняя одну общую визуальную линию через стыки клеток.
+ const g=$('wireGrid');
+ if(g)wireTiles.forEach((t,i)=>{const b=g.children[i];if(b)b.innerHTML=wireSvg(t,i,dist)});
+ return connected;
+}
+function drawMath(){
+ const a=$('puzzleArea');
+ a.innerHTML='<p>Решите 5 примеров за 90 секунд. На уровне «Стажёр» сумма или произведение не превышает 200. Верный ответ повышает оплату на 1, ошибка снижает её на 1, но оплата не опускается ниже 0.</p><div id="mathProblem" style="font-size:clamp(34px,7vw,54px);font-weight:850;margin:18px 0;color:#edf3fa">Готовим пример…</div><div style="height:12px;background:#0f1925;border:1px solid #40536a;border-radius:8px;overflow:hidden;margin:0 auto 14px;max-width:360px"><div id="mathPayFill" style="height:100%;width:0%;background:linear-gradient(90deg,#62b6ff,#68d6a0);transition:width .2s"></div></div><div style="display:flex;justify-content:space-between;max-width:360px;margin:0 auto 12px;color:#a9b8ca;font-size:12px"><span>Оплата: <b id="mathPayValue">0 / 5</b></span><span>Примеры: <b id="mathCount">0 / 5</b></span></div><div id="mathAnswerRow" style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap"><input id="mathAnswer" inputmode="numeric" type="number" autocomplete="off" aria-label="Ответ" placeholder="Ваш ответ" style="width:150px;padding:12px;border-radius:9px;border:1px solid #53708b;background:#101a27;color:#fff;font:inherit;font-size:20px"><button class="btn primary" id="mathSubmit" type="button">Ответить</button></div><div id="mathFeedback" class="small" style="margin-top:12px;min-height:22px">Введите ответ и нажмите «Ответить».</div>';
+ const button=$('mathSubmit'),field=$('mathAnswer');
+ button.addEventListener('click',submitMathAnswer);
+ field.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();submitMathAnswer();}});
+ if(S.mathQuestion){
+  // Restore the exact same unresolved example after a patience interruption.
+  const p=$('mathProblem');if(p)p.textContent=`${S.mathQuestion.x} ${S.mathQuestion.sign} ${S.mathQuestion.y} = ?`;
+  const v=$('mathPayValue'),f=$('mathPayFill'),count=$('mathCount');
+  if(v)v.textContent=`${S.pay} / 5`;
+  if(f)f.style.width=(S.pay*20)+'%';
+  if(count)count.textContent=`${S.mathAnswered} / ${S.mathTarget}`;
+ } else newMathQuestion();
+}
+function submitMathAnswer(){
+ if(S.phase!=='puzzle'||S.paused||!S.mathQuestion)return;
+ const field=$('mathAnswer'),feedback=$('mathFeedback');
+ if(!field||!field.value.trim()){if(feedback)feedback.textContent='Сначала введите числовой ответ.';if(field)field.focus();return;}
+ const val=Number(field.value),correct=val===S.mathQuestion.answer;
+ S.mathAnswered++;
+ if(correct){S.pay=Math.min(5,S.pay+1);if(feedback)feedback.textContent='Верно! Шкала оплаты +1.';log('Финансовый пример','Верный ответ: оплата +1');}
+ else{S.pay=Math.max(0,S.pay-1);if(feedback)feedback.textContent=`Неверно. Правильный ответ: ${S.mathQuestion.answer}. Шкала оплаты −1.`;log('Финансовый пример','Ошибка: оплата −1');}
+ stats();
+ const v=$('mathPayValue'),f=$('mathPayFill'),count=$('mathCount');if(v)v.textContent=`${S.pay} / 5`;if(f)f.style.width=(S.pay*20)+'%';if(count)count.textContent=`${S.mathAnswered} / ${S.mathTarget}`;
+ if(S.mathAnswered>=S.mathTarget){S.puzzleSolved=true;winClient();return;}
+ S.mathQuestion=null;
+ newMathQuestion();
+}
+function newMathQuestion(){
+ if(S.phase!=='puzzle')return;
+ const trainee=rank()==='Стажёр';
+ const multiply=Math.random()<.5;
+ let x,y,answer,sign;
+ if(multiply){
+  x=10+Math.floor(Math.random()*90);
+  const maxY=trainee?Math.max(2,Math.min(9,Math.floor(200/x))):9;
+  y=2+Math.floor(Math.random()*(maxY-1));
+  answer=x*y;sign='×';
+ }else{
+  x=10+Math.floor(Math.random()*(trainee?90:190));
+  const maxY=trainee?Math.max(10,200-x):199;
+  y=10+Math.floor(Math.random()*(maxY-9));
+  answer=x+y;sign='+';
+ }
+ S.mathQuestion={x,y,sign,answer};
+ const p=$('mathProblem');if(p)p.textContent=`${x} ${sign} ${y} = ?`;
+ const f=$('mathAnswer');if(f){f.value='';f.focus();}
+}
+function initSlides(){slideTiles=[1,2,3,4,5,6,7,8,0];do{for(let i=0;i<35;i++){let z=slideTiles.indexOf(0),r=Math.floor(z/3),c=z%3,opts=[];if(r)opts.push(z-3);if(r<2)opts.push(z+3);if(c)opts.push(z-1);if(c<2)opts.push(z+1);let j=opts[Math.floor(Math.random()*opts.length)];[slideTiles[z],slideTiles[j]]=[slideTiles[j],slideTiles[z]]}}while(isSolved())}
+function isSolved(){return slideTiles.every((v,i)=>v===(i===8?0:i+1))}
+function drawSlides(){let a=$('puzzleArea');a.innerHTML='<p>Соберите цельную картинку: передвигайте фрагменты в пустую клетку. Образец — ниже.</p><div class="grid" id="slideGrid" style="grid-template-columns:repeat(3,minmax(72px,104px));max-width:330px"></div><div class="small">Цель: восстановить изображение копилки, монет и графика.</div><div id="slidePreview" style="width:132px;height:132px;margin:10px auto 0;border:2px solid #53708b;border-radius:8px;background-size:300% 300%;background-position:center"></div><div class="small">Образец готовой картинки</div>';let svg='<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#173b61"/><stop offset="1" stop-color="#53b7a5"/></linearGradient></defs><rect width="300" height="300" fill="url(#bg)"/><circle cx="230" cy="65" r="35" fill="#f7d36b" opacity=".9"/><path d="M25 245 L90 195 L135 215 L205 130 L275 155" fill="none" stroke="#b5f4d2" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M255 130 L275 155 L245 165" fill="none" stroke="#b5f4d2" stroke-width="10" stroke-linecap="round"/><ellipse cx="135" cy="210" rx="75" ry="55" fill="#ff9e79" stroke="#ffe0c8" stroke-width="6"/><circle cx="195" cy="207" r="26" fill="#ff9e79" stroke="#ffe0c8" stroke-width="6"/><circle cx="203" cy="200" r="4" fill="#17334a"/><path d="M85 164 L115 164" stroke="#17334a" stroke-width="8" stroke-linecap="round"/><path d="M105 265 L105 280 M165 265 L165 280" stroke="#ffe0c8" stroke-width="13" stroke-linecap="round"/><g fill="#ffd45c" stroke="#fff0a8" stroke-width="4"><circle cx="65" cy="95" r="24"/><circle cx="85" cy="130" r="18"/><circle cx="35" cy="145" r="14"/></g><text x="150" y="35" text-anchor="middle" font-size="19" font-family="Arial" font-weight="bold" fill="white">ФИНАНСЫ</text></svg>';let img='url("data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg)+'")';let g=$('slideGrid');$('slidePreview').style.backgroundImage=img;slideTiles.forEach((v,i)=>{let b=document.createElement('button');b.className='tile '+(v?'sliding':'empty');if(v){b.style.backgroundImage=img;b.style.backgroundSize='300% 300%';let goal=v-1;b.style.backgroundPosition=(goal%3*50)+'% '+(Math.floor(goal/3)*50)+'%';b.style.backgroundColor='#24496b';b.textContent=''}b.title=v?'Фрагмент картинки '+v:'Пустая клетка';b.onclick=()=>moveSlide(i);g.append(b)})}
+function moveSlide(i){if(S.phase!=='puzzle'||S.paused)return;let z=slideTiles.indexOf(0);if(Math.abs(Math.floor(i/3)-Math.floor(z/3))+Math.abs(i%3-z%3)!==1)return;[slideTiles[i],slideTiles[z]]=[slideTiles[z],slideTiles[i]];drawSlides();if(isSolved())winClient()}
+function planInterrupt(){clearTimeout(S.interruptTimer);if(testMode||S.phase!=='puzzle'||S.paused)return;S.interruptTimer=setTimeout(()=>{if(S.phase==='puzzle'&&!S.paused)showInterrupt()},15000+Math.random()*3000)}
+function showInterrupt(){clearInterval(S.interval);clearTimeout(S.interruptTimer);S.phase='interrupt';S.interruptOpen=true;S.interrupts++;const relevant=interruptions.filter(x=>x.moods.includes(S.mood));let d=relevant[Math.floor(Math.random()*relevant.length)],opts=shuffle(d.opts);render(`<div class="customer"><div class="avatar">☻</div><div><div class="name">${S.current.name} · вопрос ${S.interrupts} из 7+</div><div class="question">${d.q}</div></div></div><p>Игра приостановлена. Текущий пример сохранится — после ответа клиенту вы продолжите с него. Выберите одну из закрытых реплик клиента.</p><div id="hiddenReplies" style="display:grid;gap:10px;margin:16px 0">${opts.map((o,i)=>`<button class="btn replyHidden" data-reply="${i}" style="width:100%;text-align:left;min-height:48px;background:#f3f4f6;color:#253044;border:2px solid #cbd5e1;font-weight:700">▰▰▰▰▰▰▰▰▰▰▰▰</button>`).join('')}</div><div class="clock" id="responseClock">Выберите ответ</div><div class="small" id="responseHint">После выбора реплика откроется на 6 секунд. Затем терпение изменится с учётом настроения клиента, и мини-игра продолжится.</div>`);$('phaseLabel').textContent='Ответ клиенту';document.querySelectorAll('.replyHidden').forEach(b=>b.addEventListener('click',()=>{if(S.phase!=='interrupt'||S.paused||S.responseTimer)return;let chosen=opts[Number(b.dataset.reply)];document.querySelectorAll('.replyHidden').forEach((x,i)=>{x.disabled=true;x.style.cursor='default';x.style.opacity='1';if(i===Number(b.dataset.reply)){x.textContent=chosen[0];x.style.background='#1d3d35';x.style.borderColor='#4e9b7f';x.style.color='#d2ffea'}else{x.style.visibility='hidden'}});$('responseClock').textContent='6.0 сек.';let until=Date.now()+6000;S.interval=setInterval(()=>{let e=$('responseClock');if(e)e.textContent=Math.max(0,(until-Date.now())/1000).toFixed(1)+' сек.'},50);S.responseTimer=setTimeout(()=>resolveInterrupt(chosen[1]),6000)}))}
+function resolveInterrupt(quality){if(S.paused||S.phase!=='interrupt')return;clearInterval(S.interval);clearTimeout(S.responseTimer);S.responseTimer=null;let delta=0;if(S.mood==='neutral'){delta=0;}else if(S.mood==='positive'){delta=quality>0?2:quality<0?-1:0;}else if(S.mood==='negative'){delta=quality>0?1:quality<0?-2:0;}S.patience=Math.max(-3,Math.min(3,S.patience+delta));stats();S.interruptOpen=false;log('Ответ оператора',delta>0?`Терпение +${delta}`:delta<0?`Терпение ${delta}`:'Терпение без изменений');if(S.patience<=-3){failClient('Клиент ушёл','Терпение закончилось. Клиент отказался ждать.');return}if(S.puzzleSolved){S.phase='puzzle';winClient();return}S.phase='puzzle';S.gameDeadline=Date.now()+S.gameLeft*1000;drawPuzzle();S.interval=setInterval(tickPuzzle,200);planInterrupt()}
+function winClient(){if(S.phase!=='puzzle')return;clearInterval(S.interval);clearTimeout(S.interruptTimer);clearTimeout(S.responseTimer);S.interval=null;S.interruptTimer=null;S.responseTimer=null;S.puzzleSolved=true;S.phase='result';if(testMode){showModal('✅','Мини-игра пройдена','Тестовый запуск завершён. Можно вернуться в главное меню.','В меню',()=>{finishTestToMenu()});return}log('Задача решена',S.current.type==='tech'?'Техническая проблема':'Финансовая задача');showModal('✅','Проблема решена','Основная задача выполнена. Переходим к следующему звонку — вопросы терпения больше не задаются.','Следующий звонок',()=>{S.phase='waiting';scheduleCall()})}
+function failClient(title,text){if(S.phase==='over'||S.phase==='result')return;clearInterval(S.interval);clearTimeout(S.interruptTimer);S.phase='result';if(testMode){showModal('⚠️',title,text+' Это был тестовый запуск.','В меню',()=>finishTestToMenu());return}S.lives=Math.max(0,S.lives-1);if(title==='Время вышло'||title==='Клиент ушёл'||title==='Клиент ушёл из компании')S.missed++;stats();log(title,text);if(S.lives<=0){endGame('Вы уволены','Жизни закончились. Смена завершена досрочно.');return}showModal('⚠️',title,text,'Следующий звонок',()=>scheduleCall())}
+function miss(){if(S.phase!=='ringing')return;stopAll();S.missed++;S.lives=Math.max(0,S.lives-1);stats();log('Звонок пропущен','Не успели ответить за 3 секунды.');if(S.lives<=0){endGame('Вы уволены','Жизни закончились. Смена завершена досрочно.');return}showModal('📵','Звонок пропущен','Вы не успели ответить за 3 секунды. Потеряна одна жизнь.','Продолжить',()=>scheduleCall())}
+function setMenuLayout(on){const aside=document.querySelector('aside.window');const foot=document.querySelector('.foot');if(aside)aside.classList.toggle('hidden',on);if(foot)foot.classList.toggle('hidden',on);$('pauseBtn').classList.toggle('hidden',on||S.paused||S.gameOver);$('playBtn').classList.toggle('hidden',on||!S.paused);$('menuBtn').classList.toggle('hidden',on)}
+function openMainMenu(){
+ if(testMode){finishTestToMenu();return}
+ if(!S.paused&&!S.gameOver){menuWasPaused=false;if(S.phase==='puzzle')S.gameLeft=Math.max(0,(S.gameDeadline-Date.now())/1000);S.paused=true;stopAll();$('app').classList.add('paused')}
+ else menuWasPaused=S.paused;
+ $('modal').classList.add('hidden');setMenuLayout(true);$('phaseLabel').textContent='Главное меню';
+ const canContinue=campaignStarted&&!S.gameOver;
+ render(`<div class="statusicon">☎</div><h2>Главное меню</h2><p>Рабочее место оператора — выберите действие.</p><div style="display:grid;gap:10px;width:min(360px,100%);margin:10px auto 0">${canContinue?'<button class="btn primary" id="continueGameBtn">▶ Продолжить игру</button>':''}<button class="btn primary" id="startGameBtn">${canContinue?'↻ Начать игру заново':'▶ Начать игру'}</button><button class="btn secondary" id="saveGameBtn" disabled style="opacity:.45;cursor:not-allowed">▣ Сохранить игру (скоро)</button><button class="btn secondary" id="testGamesBtn">⚙ Тест мини-игр</button><button class="btn secondary" id="helpBtn">❔ Справка</button><button class="btn secondary" id="exitGameBtn">⏻ Выход</button></div><div class="small" style="margin-top:14px">Сохранение пока недоступно.</div>`,true);
+ if(canContinue)$('continueGameBtn').onclick=()=>{setMenuLayout(false);if(S.paused)resume();else scheduleCall()};
+ $('startGameBtn').onclick=()=>{if(campaignStarted&&!S.gameOver){if(!confirm('Начать новую игру? Текущий прогресс будет сброшен.'))return;restart()}else if(campaignStarted&&S.gameOver){restart()}else{S.paused=false;$('app').classList.remove('paused');showStartScreen()}setMenuLayout(false);if(!campaignStarted){$('phaseLabel').textContent='Готовность к смене'}};
+ $('testGamesBtn').onclick=()=>showTestGameChoice();
+ $('helpBtn').onclick=showHelp;
+ $('exitGameBtn').onclick=exitGame;
+}
+function showHelp(){
+ render(`<div class="helpContent"><div class="statusicon">❔</div><h2 style="text-align:center">Справка: как играть</h2><p class="helpLead">Ваша задача — работать оператором поддержки: принимать звонки, подбирать подходящие ответы и решать задачи клиентов.</p>
+ <section class="helpSection"><h3>1. Начало и смены</h3><p>В главном меню нажмите «Начать игру», затем — «Следующая смена». В каждой смене нужно обработать до 10 звонков. В начале есть 3 жизни. Если клиент уходит, вы пропускаете звонок или не успеваете решить задачу, теряется жизнь. Когда жизни заканчиваются, смена завершается.</p><p>После 15 завершённых смен оператор получает повышение до специалиста. На этом текущий уровень заканчивается: следующий уровень в разработке. Прогресс не сохраняется после закрытия страницы.</p></section>
+ <section class="helpSection"><h3>2. Входящий звонок и выбор ответа</h3><p>Когда звонит телефон, нажмите «Ответить» в течение 3 секунд. Затем прочитайте вопрос и выберите подходящий ответ: технический — для проблем с интернетом или техникой, ответ по оплате — для финансовых вопросов. Грубый ответ приводит к уходу клиента и потере жизни.</p><p>Настроение клиента отмечено значком и подписью. Сам выбор тематики звонка не меняет терпение. Шкала терпения меняется только после ответов на закрытые реплики во время мини-игры.</p></section>
+ <section class="helpSection"><h3>3. Мини-игра «Электрик»</h3><p>Задача — соединить источник электричества ⚡ с лампочкой 💡 на поле 5 × 5. Нажимайте на прямые и угловые трубки, чтобы поворачивать их на 90 градусов. Пустые клетки не вращаются. Когда путь от источника до лампы становится непрерывным, соединённые участки подсвечиваются зелёным и задача считается решённой.</p><p>На решение в обычной смене даётся 60 секунд.</p></section>
+ <section class="helpSection"><h3>4. Мини-игра «Примеры»</h3><p>Решите 5 примеров на сложение или умножение за 90 секунд. Введите число и нажмите «Ответить» или клавишу Enter. За верный ответ шкала оплаты увеличивается на 1, за ошибку уменьшается на 1; оплата не опускается ниже нуля. Уровень сложности зависит от квалификации.</p></section>
+ <section class="helpSection"><h3>5. Терпение клиента и пауза</h3><p>Во время решения задачи клиент иногда задаёт дополнительный вопрос. Выберите одну из трёх закрытых реплик: после выбора она откроется на 6 секунд, и только тогда шкала терпения изменится. Если терпение опустится до −3, клиент уйдёт. Шкала ограничена значениями от −3 до +3. Нейтральный клиент не меняет шкалу терпения при любом ответе; позитивный даёт +2 за хороший ответ и −1 за плохой; негативный даёт +1 за хороший ответ и −2 за плохой.</p><p>«Пауза» останавливает игру. «Главное меню» также приостанавливает текущую кампанию; выберите «Продолжить игру», чтобы вернуться к ней.</p></section>
+ <section class="helpSection"><h3>6. Тест мини-игр и сохранение</h3><p>В пункте «Тест мини-игр» можно отдельно запустить «Примеры» или «Электрик» без прохождения звонков. Каждый тестовый запуск начинается заново и не продвигает основную кампанию. После прохождения или ошибки можно вернуться в меню.</p><p>«Сохранить игру» пока неактивно. Кнопка «Выход» завершает игровой интерфейс; если браузер не закрывает вкладку автоматически, закройте её вручную.</p></section>
+ <div style="display:flex;justify-content:center;margin-top:18px"><button class="btn primary" id="helpBackBtn">← Вернуться в главное меню</button></div></div>`,false);
+ $('phaseLabel').textContent='Справка';
+ $('helpBackBtn').onclick=openMainMenu;
+}
+function exitGame(){
+ stopAll();testMode=false;testSnapshot=null;S.paused=true;S.gameOver=true;S.phase='exit';
+ // Полностью убираем игровой интерфейс. Вкладку можно закрыть вручную, если браузер
+ // не разрешит странице закрыть себя программно.
+ document.body.innerHTML='<main style="min-height:100vh;display:grid;place-content:center;text-align:center;padding:24px;background:#101722;color:#edf3fa;font:16px/1.5 system-ui,sans-serif"><div style="font-size:48px;margin-bottom:12px">👋</div><h1 style="margin:0 0 8px;font-size:26px">Выход выполнен</h1><p style="margin:0;color:#a9b8ca">Игра завершена. Чтобы выйти полностью, закройте вкладку браузера.</p></main>';
+ try{window.close()}catch(e){}
+}
+function showTestGameChoice(){render('<div class="statusicon">⚙</div><h2>Запуск мини-игры</h2><p>Выберите, что запустить в тестовом режиме.</p><div style="display:grid;gap:10px;width:min(360px,100%);margin:10px auto"><button class="btn primary" id="testFinanceBtn">🔢 Примеры — финансовая мини-игра</button><button class="btn primary" id="testTechBtn">🔌 Электрик — соединить провода</button><button class="btn secondary" id="backMenuBtn">← Назад в меню</button></div>',true);$('testTechBtn').onclick=()=>startTestGame('tech');$('testFinanceBtn').onclick=()=>startTestGame('finance');$('backMenuBtn').onclick=openMainMenu;$('phaseLabel').textContent='Выбор мини-игры'}
+function startTestGame(type){
+ if(!testSnapshot){testSnapshot={S:{...S,current:S.current?{...S.current}:null,timeout:null,interval:null,interruptTimer:null,responseTimer:null},queue:[...queue],wireTiles:wireTiles.map(x=>({...x})),wireGoal:wireGoal.map(x=>({...x})),slideTiles:[...slideTiles]}}
+ stopAll();
+ testMode=true;S.paused=false;S.gameOver=false;S.phase='puzzle';
+ S.current={type,name:'Тестовый режим',q:type==='tech'?'Соедините источник с лампой, собрав электрическую цепь.':'Решите финансовые примеры и проверьте навык расчётов.'};
+ S.mood='neutral';S.patience=0;S.pay=0;S.gameDuration=type==='finance'?90:60;S.gameLeft=S.gameDuration;S.gameDeadline=Date.now()+S.gameLeft*1000;
+ S.puzzleSolved=false;S.mathQuestion=null;S.mathAnswered=0;S.mathTarget=5;S.interrupts=0;S.interruptOpen=false;
+ wireTiles=[];wireGoal=[];slideTiles=[];
+ $('modal').classList.add('hidden');setMenuLayout(false);$('app').classList.remove('paused');$('pauseBtn').classList.remove('hidden');$('playBtn').classList.add('hidden');$('phaseLabel').textContent=type==='tech'?'Тест: электрик':'Тест: примеры';
+ drawPuzzle();S.interval=setInterval(tickPuzzle,200);
+}
+function finishTestToMenu(){clearInterval(S.interval);clearTimeout(S.interruptTimer);clearTimeout(S.responseTimer);$('modal').classList.add('hidden');if(testSnapshot){const snap=testSnapshot;Object.assign(S,snap.S);queue=snap.queue;wireTiles=snap.wireTiles;wireGoal=snap.wireGoal;slideTiles=snap.slideTiles;testSnapshot=null}testMode=false;S.paused=true;stopAll();openMainMenu()}
+function showStartScreen(){S.phase='shiftEnd';S.gameOver=true;render(`<div class="statusicon">☕</div><h2>Следующая смена</h2><p>Смена 1 готова к запуску. Вас ждут входящие звонки, задачи и вопросы клиентов.</p><p>У вас 3 жизни. За смену нужно обработать 10 звонков.</p><button class="btn primary" id="nextShift">Следующая смена →</button>`,true);$('phaseLabel').textContent='Готовность к смене';$('nextShift').onclick=()=>{campaignStarted=true;S.paused=false;$('app').classList.remove('paused');$('pauseBtn').classList.remove('hidden');$('menuBtn').classList.remove('hidden');$('playBtn').classList.add('hidden');S.gameOver=false;S.phase='waiting';stats();log('Смена началась','Смена '+S.shift+' началась.');scheduleCall()}}
+function shiftEnd(){
+ stopAll();S.phase='shiftEnd';S.gameOver=true;
+ if(S.shift>=15){showPromotion();return;}
+ render(`<div class="statusicon">☕</div><h2>Смена ${S.shift} завершена</h2><p>Обработано звонков: ${S.accepted}. Пропущено или не решено: ${S.missed}.</p><p>Жизни восстановлены перед следующей сменой.</p><button class="btn primary" id="nextShift">Следующая смена →</button>`,true);
+ $('phaseLabel').textContent='Смена завершена';
+ $('nextShift').onclick=()=>{
+  S.paused=false;$('app').classList.remove('paused');$('pauseBtn').classList.remove('hidden');$('menuBtn').classList.remove('hidden');$('playBtn').classList.add('hidden');
+  S.shift++;S.lives=3;S.calls=0;S.accepted=0;S.missed=0;S.gameOver=false;S.phase='waiting';S.patience=0;queue=shuffle(scenarios);stats();log('Новая смена','Смена '+S.shift+' началась.');scheduleCall();
+ };
+}
+function showPromotion(){
+ stopAll();promotionComplete=true;S.gameOver=true;S.paused=false;S.phase='promotion';stats();
+ render(`<div class="statusicon">🏆</div><h2>Вы заслужили повышение!</h2><p>Поздравляем! Вы успешно завершили 15 смен и получили квалификацию <b>Специалист</b>.</p><p>Следующий уровень в разработке.</p><div class="notice"><strong>Уровень завершён</strong><div>Спасибо за игру! Новые смены и задачи появятся в следующем уровне.</div></div><button class="btn primary" id="promotionMenuBtn" style="margin-top:16px">В главное меню</button>`,true);
+ $('phaseLabel').textContent='Повышение';
+ $('promotionMenuBtn').onclick=openMainMenu;
+}
+
+function showModal(icon,title,text,button,fn){$('modalIcon').textContent=icon;$('modalTitle').textContent=title;$('modalText').textContent=text;$('modalBtn').textContent=button;$('modalBtn').onclick=()=>{ $('modal').classList.add('hidden');fn()};$('modal').classList.remove('hidden')}
+function endGame(title,text){stopAll();S.phase='over';S.gameOver=true;showModal('⛔',title,text,'Начать заново',restart)}
+function restart(){ $('modal').classList.add('hidden');promotionComplete=false;S.lives=3;S.shift=1;S.calls=0;S.accepted=0;S.missed=0;S.gameOver=false;S.paused=false;S.phase='waiting';S.patience=0;queue=shuffle(scenarios);$('log').innerHTML='';$('pauseBtn').classList.remove('hidden');$('playBtn').classList.add('hidden');$('app').classList.remove('paused');stats();showStartScreen()}
+function pause(){if(S.paused||S.gameOver)return;S.paused=true;S.pauseAt=Date.now();if(S.phase==='puzzle')S.gameLeft=Math.max(0,(S.gameDeadline-Date.now())/1000);stopAll();$('pauseBtn').classList.add('hidden');$('playBtn').classList.remove('hidden');$('app').classList.add('paused');render('<div class="statusicon">Ⅱ</div><h2>Пауза</h2><p>Игра остановлена.</p><div class="small">Нажмите «▶ Продолжить» в правом верхнем углу, чтобы вернуться к игре.</div>',true);$('phaseLabel').textContent='Пауза'}
+function resume(){if(!S.paused)return;setMenuLayout(false);S.paused=false;$('pauseBtn').classList.remove('hidden');$('playBtn').classList.add('hidden');$('app').classList.remove('paused');if(S.phase==='puzzle'){S.gameDeadline=Date.now()+S.gameLeft*1000;S.interval=setInterval(tickPuzzle,200);planInterrupt()}else if(S.phase==='waiting')scheduleCall();else if(S.phase==='question')showCustomerQuestion();else if(S.phase==='ringing'){// restore a fresh three-second response window after pause
+S.phase='waiting';scheduleCall()}else if(S.phase==='interrupt'){showInterrupt()}}
+$('pauseBtn').onclick=pause;$('menuBtn').onclick=openMainMenu;$('playBtn').onclick=()=>{if(S.paused)resume()};document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!S.paused&&!S.gameOver){pause();return}if(S.paused)return;if(S.phase==='ringing'&&(e.key==='Enter'||e.key===' ')){e.preventDefault();answer()}if(S.phase==='question'&&['1','2','3'].includes(e.key)){}});
+queue=shuffle(scenarios);stats();openMainMenu();
+})();
+</script></body></html>
